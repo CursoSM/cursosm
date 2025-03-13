@@ -1,0 +1,80 @@
+
+
+.auth-header {
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 102;
+    background-color: var(--night-blue);
+    box-shadow: 0 20px 10px var(--night-blue);
+}
+
+.auth-header h1 {
+    margin-left: 50px;
+    font-size: 38px;
+}
+
+
+.auth-sections-nav ul{
+    display: flex;
+    list-style: none;
+    gap: 50px;
+}
+.auth-sections-nav a {
+    font-size: 22px;
+    opacity: .5;
+    transform: .5s;
+    cursor: pointer;
+}
+.auth-sections-nav a.current {
+    opacity: 1;
+}
+.auth-sections-nav a:hover {
+    opacity: 1;
+}
+
+.user-data {
+    width: 400px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-right: 50px;
+}
+.user-data button {
+    font-size: 18px;
+    width: 100%;
+
+}
+
+.sign-up {
+    background-color: var(--white);
+    color: black;
+}
+
+@media (max-width: 768px) {
+    
+    
+    .auth-sections-nav {
+        display: none;
+    }
+    .user-data {
+        display: none;
+    }
+
+    .burguer-menu {
+        font-size: 32px;
+        margin-right: 20px;
+    }
+}
+@media (min-width: 768px) {
+    
+    .burguer-menu {
+        display: none;
+    }
+}

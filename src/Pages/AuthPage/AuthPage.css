@@ -1,0 +1,15 @@
+
+.auth-page {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 90vh;
+}
+
+
+.auth-page > * {
+    z-index: 1;
+}

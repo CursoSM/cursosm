@@ -1,0 +1,51 @@
+:root {
+  --white: white;
+  --big-yellow: #ffbb00;
+
+  --green: rgb(112, 239, 112);
+  --blue: rgb(31, 47, 148);
+  --night-blue: #00020d; 
+  --sky-blue: #030b35;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: "Lexend", sans-serif;
+  color: var(--white);
+}
+h1 {
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  color: var(--big-yellow);
+}
+
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  overflow-x: hidden;
+  background-color: var(--night-blue);
+}
+
+
+button {
+  background-color: var(--blue);
+  padding: 10px 15px 10px 15px;
+  color: var(--white);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+
+
+.dot-pattern {
+  background-image: radial-gradient(var(--sky-blue) 2px, transparent 2px);
+  background-size: 32px 32px;
+  background-color: var(--night-blue);
+}
