@@ -11,7 +11,7 @@ const AuthHeader = ({props}) => {
     const {setIsOpen} = useContext(SlideBarContext)
 
     return (
-        <div className="auth-header dot-pattern">
+        <div className="auth-header ">
             <h1>Curso SM</h1>
             <nav className="auth-sections-nav">
                 <ul>

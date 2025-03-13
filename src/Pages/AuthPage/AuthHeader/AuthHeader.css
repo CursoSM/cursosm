@@ -8,9 +8,9 @@
     justify-content: space-between;
     position: sticky;
     top: 0;
-    z-index: 102;
-    background-color: var(--night-blue);
-    box-shadow: 0 20px 10px var(--night-blue);
+    background-color: var(--night-blue-o5);
+    backdrop-filter: blur(5px);
+        z-index: 20;
 }
 
 .auth-header h1 {
