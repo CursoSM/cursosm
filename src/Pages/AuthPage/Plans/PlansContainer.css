@@ -9,7 +9,6 @@
     align-items: center;
     gap: 20px;
     margin-bottom: 0;
-
 }
 
 
@@ -19,5 +18,8 @@
         justify-content: flex-start;
         padding-bottom: 200px;
         height: auto;
+    }
+    .plans-container .plan-card:first-child {
+        margin-top: 30px;
     }
 }

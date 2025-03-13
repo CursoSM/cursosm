@@ -1,6 +1,8 @@
 import { useState } from "react"
 import "./CourseOverviewAuth.css"
 
+import { motion } from "framer-motion";
+
 import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
 
 import CustomButton from "../../Components/CustomButton/CustomButton";
@@ -27,6 +29,16 @@ const goalStyle = (index, currentIndex) => {
 const CourseOverviewAuth = () => {
     const [currentGoal, setCurrentGoal] = useState(0) // Inicializa con 0, o el índice que prefieras
 
+    const [swipeDirection, setSwipeDirection] = useState(null);
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+
+
+
     const handleNextGoal = () => {
         if (currentGoal < 5) {
             setCurrentGoal(currentGoal + 1)
@@ -41,23 +53,91 @@ const CourseOverviewAuth = () => {
 
 
 
+  // Detecta el inicio del toque
+  const handleTouchStart = (e) => {
+    touchStartX = e.touches[0].clientX; // Guardamos la posición inicial en el eje X
+    touchStartY = e.touches[0].clientY; // Guardamos la posición inicial en el eje Y
+  };
+
+  // Detecta el final del toque
+  const handleTouchEnd = (e) => {
+    touchEndX = e.changedTouches[0].clientX; // Guardamos la posición final en el eje X
+    touchEndY = e.changedTouches[0].clientY; // Guardamos la posición final en el eje Y
+
+    const deltaX = touchEndX - touchStartX; // Distancia en el eje X
+    const deltaY = touchEndY - touchStartY; // Distancia en el eje Y
+
+    // Si el movimiento en el eje Y es mayor que en el eje X, no consideramos el deslizamiento
+    if (Math.abs(deltaY) > Math.abs(deltaX)) {
+      setSwipeDirection(null); // No es un deslizamiento horizontal
+      return;
+    }
+
+    // Si el movimiento en el eje X es mayor, detectamos la dirección
+    if (deltaX > 0) {
+      handlePrevGoal(); // Deslizó a la derecha
+    } else if (deltaX < 0) {
+      handleNextGoal(); // Deslizó a la izquierda
+    }
+  };
+
 
     return (
         <section className="course-overview-auth">
             <article className="course-overview">
                 <div className="course-overview-container">
-                    <h1 className="course-title">atrévete a ser la mejor versión de vos.</h1>
-                    <h2 className="course-subtitle">Desarrolla tu potencial, supera tus límites y alcanza tus metas con nuestro enfoque único de aprendizaje.</h2>
+                    <motion.h1
+                     initial={{
+                        scale: .5,
+                        opacity: 0
+                    }}
+                    whileInView={{
+                        scale: 1,
+                        opacity: 1
+                    }}
+                    className="course-title">atrévete a ser la mejor versión de vos.</motion.h1>
+                    <motion.h2 
+                     initial={{
+                        scale: .5,
+                        opacity: 0
+                    }}
+                    whileInView={{
+                        scale: 1,
+                        opacity: 1
+                    }}
+                    className="course-subtitle">Desarrolla tu potencial, supera tus límites y alcanza tus metas con nuestro enfoque único de aprendizaje.</motion.h2>
                 </div>
             </article>
 
+
+<h1>{swipeDirection}</h1>
             <article className="course-goals">
-                <h2 className="subtitle">¿Qué Aprenderás en Este Curso?</h2>
-                <div className="course-goals-list">
+                <motion.h2
+                 initial={{
+                    scale: .5,
+                    opacity: 0
+                }}
+                whileInView={{
+                    scale: 1,
+                    opacity: 1
+                }}
+                 className="subtitle">¿Qué Aprenderás en Este Curso?</motion.h2>
+                <motion.div className="course-goals-list"
+                 initial={{
+                    scale: .5,
+                    opacity: 0
+                }}
+                whileInView={{
+                    scale: 1,
+                    opacity: 1
+                }}
+                >
                     <div
                         className={`course-goal course-goal1 ${currentGoal == 0 ? "current-goal" : ""}`}
                         onClick={() => setCurrentGoal(0)}
                         style={goalStyle(0, currentGoal)}
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
                     >
                         <h2>Autoconocimiento Profundo</h2>
                         <p>
@@ -72,6 +152,8 @@ const CourseOverviewAuth = () => {
                         className={`course-goal course-goal2 ${currentGoal == 1 ? "current-goal" : ""}`}
                         style={goalStyle(1, currentGoal)}
                         onClick={() => setCurrentGoal(1)}
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
                     >
                         <h2>Gestión Emocional Efectiva</h2>
                         <p>
@@ -85,6 +167,8 @@ const CourseOverviewAuth = () => {
                         className={`course-goal course-goal3 ${currentGoal == 2 ? "current-goal" : ""}`}
                         style={goalStyle(2, currentGoal)}
                         onClick={() => setCurrentGoal(2)}
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
                     >
                         <h2>Establecimiento de Metas y Planificación Estratégica</h2>
                         <p>
@@ -97,6 +181,8 @@ const CourseOverviewAuth = () => {
                         className={`course-goal course-goal4 ${currentGoal == 3 ? "current-goal" : ""}`}
                         style={goalStyle(3, currentGoal)}
                         onClick={() => setCurrentGoal(3)}
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
                     >
                         <h2>Técnicas de Motivación y Resiliencia</h2>
                         <p>
@@ -110,6 +196,8 @@ const CourseOverviewAuth = () => {
                         className={`course-goal course-goal5 ${currentGoal == 4 ? "current-goal" : ""}`}
                         style={goalStyle(4, currentGoal)}
                         onClick={() => setCurrentGoal(4)}
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
                     >
                         <h2>Relaciones y comunicación asertiva</h2>
                         <p>
@@ -122,6 +210,8 @@ const CourseOverviewAuth = () => {
                         className={`course-goal course-goal6 ${currentGoal == 5 ? "current-goal" : ""}`}
                         style={goalStyle(5, currentGoal)}
                         onClick={() => setCurrentGoal(5)}
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
                     >
                         <h2>Comunicación Asertiva y Liderazgo Personal</h2>
                         <p>Fortalece tus habilidades comunicativas y de liderazgo, aprendiendo a
@@ -130,7 +220,7 @@ const CourseOverviewAuth = () => {
                         <img className="bubble1" src="/Bubble.png" alt="Bubble" />
                         <img className="bubble2" src="/Bubble1.png" alt="Bubble" />
                     </div>
-                </div>
+                </motion.div>
                 <div className="course-goals-nav">
                     <CustomButton onClick={handlePrevGoal}><BiSolidLeftArrow /></CustomButton>
                     <div className={`course-goal-nav-index ${currentGoal == 0 ? "current-nav-index" : ""}`}></div>
@@ -145,24 +235,96 @@ const CourseOverviewAuth = () => {
 
             <article className="video-presentation-0-article">
                 <div className="video-container">
-                    <iframe
+                    <motion.iframe
+                        initial={{
+                            opacity: 0,
+                            scale: .5
+                        }}
+                        whileInView={{
+                            opacity: 1,
+                            scale: 1
+                        }}
                         src="https://www.youtube.com/embed/58cIOVjlXV4?si=tT-wjUD1dY4NIfEr"
                         title="YouTube video player"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerpolicy="strict-origin-when-cross-origin"
                         allowfullscreen>
-                    </iframe>
+                    </motion.iframe>
                 </div>
                 <div className="video-presentation-data">
-                    <h2 className="subtitle">Video presentación</h2>
+                    <motion.h2 
+                    className="subtitle"
+                    initial={{
+                        opacity: 0,
+                        scale: .5
+                    }}
+                    whileInView={{
+                        opacity: 1,
+                        scale: 1
+                    }}>
+                        Video presentación</motion.h2>
                     <ul>
-                        <li>Elemento 1</li>
-                        <li>Elemento 2</li>
-                        <li>Elemento 3</li>
-                        <li>Elemento 4</li>
-                        <li>Elemento 5</li>
-                        <li>Elemento 6</li>
+                        <motion.li
+                        initial={{
+                            opacity: 0,
+                            scale: .5
+                        }}
+                        whileInView={{
+                            opacity: 1,
+                            scale: 1
+                        }}>
+                            Transforma tu vida profesional con nuestro curso</motion.li>
+                        <motion.li
+                        initial={{
+                            opacity: 0,
+                            scale: .5
+                        }}
+                        whileInView={{
+                            opacity: 1,
+                            scale: 1
+                        }}>
+                            Acceso exclusivo a contenido de alta calidad</motion.li>
+                        <motion.li
+                        initial={{
+                            opacity: 0,
+                            scale: .5
+                        }}
+                        whileInView={{
+                            opacity: 1,
+                            scale: 1
+                        }}>
+                            Metodología práctica y aplicada</motion.li>
+                        <motion.li
+                        initial={{
+                            opacity: 0,
+                            scale: .5
+                        }}
+                        whileInView={{
+                            opacity: 1,
+                            scale: 1
+                        }}>
+                            Aprende a tu propio ritmo con soporte constante</motion.li>
+                        <motion.li
+                        initial={{
+                            opacity: 0,
+                            scale: .5
+                        }}
+                        whileInView={{
+                            opacity: 1,
+                            scale: 1
+                        }}>
+                            Comunidad activa y networking</motion.li>
+                        <motion.li
+                        initial={{
+                            opacity: 0,
+                            scale: .5
+                        }}
+                        whileInView={{
+                            opacity: 1,
+                            scale: 1
+                        }}>
+                            Garantía de satisfacción y resultados medibles</motion.li>
 
                     </ul>
                 </div>
@@ -171,30 +333,110 @@ const CourseOverviewAuth = () => {
 
             <article className="course-benefits">
                 <div class="course-benefits-container">
-                    <div class="div1">
+                    <motion.div 
+                    class="div1"
+                    initial={{
+                        scale: .5,
+                        opacity: 0
+                    }}
+                    whileInView={{
+                        scale: 1,
+                        opacity: 1
+                    }}
+                    >
                         <h2>
                         Conviertete en esa persona que quieres ser
                         </h2>
-                    </div>
-                    <div class="div2"></div>
-                    <div class="div3">
+                    </motion.div>
+                    <motion.div 
+                    class="div2"
+                    initial={{
+                        scale: .5,
+                        opacity: 0
+                    }}
+                    whileInView={{
+                        scale: 1,
+                        opacity: 1
+                    }}
+                    ></motion.div>
+                    <motion.div 
+                    class="div3"
+                    initial={{
+                        scale: .5,
+                        opacity: 0
+                    }}
+                    whileInView={{
+                        scale: 1,
+                        opacity: 1
+                    }}
+                    >
                         <h2>
                         Acceso ilimitado a más de 100 horas de mentorías grabadas para profundizar en tu aprendizaje.
                         </h2>
-                    </div>
-                    <div class="div4"></div>
-                    <div class="div5"></div>
-                    <div class="div6">
+                    </motion.div>
+                    <motion.div 
+                    class="div4"
+                    initial={{
+                        scale: .5,
+                        opacity: 0
+                    }}
+                    whileInView={{
+                        scale: 1,
+                        opacity: 1
+                    }}
+                    ></motion.div>
+                    <motion.div 
+                    class="div5"
+                    initial={{
+                        scale: .5,
+                        opacity: 0
+                    }}
+                    whileInView={{
+                        scale: 1,
+                        opacity: 1
+                    }}
+                    ></motion.div>
+                    <motion.div 
+                    class="div6"
+                    initial={{
+                        scale: .5,
+                        opacity: 0
+                    }}
+                    whileInView={{
+                        scale: 1,
+                        opacity: 1
+                    }}
+                    >
                         <h2 style={{textAlign: "left"}}>
                         Sesiones en vivo semanales para resolver tus dudas y compartir experiencias.
                         </h2>
-                    </div>
-                    <div class="div7"></div>
-                    <div class="div8">
+                    </motion.div>
+                    <motion.div 
+                    class="div7"
+                    initial={{
+                        scale: .5,
+                        opacity: 0
+                    }}
+                    whileInView={{
+                        scale: 1,
+                        opacity: 1
+                    }}
+                    ></motion.div>
+                    <motion.div 
+                    class="div8"
+                    initial={{
+                        scale: .5,
+                        opacity: 0
+                    }}
+                    whileInView={{
+                        scale: 1,
+                        opacity: 1
+                    }}
+                    >
                         <h2 style={{textAlign: "left"}}>
                         Adopta hábitos y mentalidades que te acercarán a tus objetivos financieros y personales.
                         </h2>
-                    </div>
+                    </motion.div>
                 </div>
 
             </article>

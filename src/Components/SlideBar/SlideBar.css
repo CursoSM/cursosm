@@ -31,7 +31,31 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
+    height: 60%;
 }
 .slide-bar-body a {
     font-size: 28px;
+    opacity: .5;
+}
+.slide-bar-body .current {
+    opacity: 1;
+}
+
+
+.slide-bar-footer {
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.slide-bar-footer button {
+    width: 45%;
+    height: 50px;
+    font-size: 100%;
+    font-weight: bold;
+}
+.signup-button {
+    background-color: var(--white);
+    color: var(--night-blue);
 }

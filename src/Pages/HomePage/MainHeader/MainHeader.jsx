@@ -1,10 +1,14 @@
 import CustomButton from "../../../Components/CustomButton/CustomButton"
+import useScrolling from "../../../helpers/useScrolling"
 import "./MainHeader.css"
 
 
 const MainHeader = () => {
+    const {isScrolling} = useScrolling()
+
+
     return (
-        <div className="main-header">
+        <div className={`main-header`}>
             <h1>
                 Curso SM           
             </h1>

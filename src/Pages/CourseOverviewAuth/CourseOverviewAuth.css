@@ -382,6 +382,15 @@
     .course-goal.current-goal {
         min-width: 80% !important;
     }
+    .bubble1 {
+        width: 100vw;
+    }
+    .bubble2 {
+        width: 70vw;
+    }
+    .bubble3 {
+        width: 80vw;
+    }
 
 
 
@@ -399,7 +408,18 @@
         width: 95%;
         justify-content: center;
     }
-
+    .video-presentation-data ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100% !important;
+        margin: 0;
+        gap: 10px;
+    }
+    .video-presentation-data li {
+        width: 90%;
+        font-size: 18px;
+    }
 
 
     .course-benefits {
@@ -413,5 +433,11 @@
     }
     .div2, .div4, .div7 {
         height: 100%;
+    }
+    .course-benefits-container div h2 {
+        width: 90% !important;
+        text-align: justify !important;
+        font-size: 22px;
+
     }
 }
