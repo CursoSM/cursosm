@@ -1,0 +1,80 @@
+
+
+.auth-modal-form-bg {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+
+    background-color: rgba(0, 0, 0, 0.626);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 500;
+}
+
+.auth-modal-form {
+    width: 50%;
+    height: 80%;
+    padding: 20px;
+
+    background-color: var(--sky-blue);
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.auth-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between	;
+}
+.auth-modal-header svg {
+    font-size: 28px;
+    opacity: .5;
+    transition: .4s;
+    cursor: pointer;
+}
+.auth-modal-header svg:hover {
+    opacity: 1;
+}
+
+.auth-modal-form h2 {
+    text-transform: uppercase;
+    font-size: clamp(22px, 3vw, 3vw);
+}
+
+.auth-modal-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.auth-modal-form .confirm-auth-btn {
+    margin-top: 20px;
+}
+
+.forgot-password-a {
+    width: fit-content;
+    margin-left: auto;
+    text-align: right;
+    margin-top: 20px;
+}
+.auth-modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.auth-modal-footer p {
+    color: var(--dangerous-red);
+}
+
+@media (max-width: 1024px) {
+    .auth-modal-form {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+}

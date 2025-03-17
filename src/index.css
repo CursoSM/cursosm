@@ -1,5 +1,5 @@
 :root {
-  --white: white;
+  --white: rgb(207, 206, 237);
   --big-yellow: #ffbb00;
 
   --green: rgb(112, 239, 112);
@@ -7,6 +7,7 @@
   --night-blue: #00020d; 
   --night-blue-o5: #00020dc5;
   --sky-blue: #030b35;
+  --dangerous-red: rgb(243, 51, 51);
 }
 
 * {
@@ -42,11 +43,33 @@ button {
   border-radius: 10px;
   cursor: pointer;
 }
-
+input:-webkit-autofill, input {
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  -webkit-box-shadow: 0 0 0 1000px rgb(226, 226, 226) inset !important;
+  color: var(--night-blue) !important;
+}
+a {
+  color: var(--white);
+  opacity: .5;
+  transition: .5s;
+  cursor: pointer;
+}
+a:hover {
+  opacity: 1;
+}
 
 
 .dot-pattern {
   background-image: radial-gradient(var(--sky-blue) 2px, transparent 2px);
   background-size: 32px 32px;
   background-color: var(--night-blue);
+}
+.fontc-rainbow {
+  background: #FFC700;
+  background: linear-gradient(to left, #FFC700 50%, #ff00d0 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

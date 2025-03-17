@@ -1,14 +1,107 @@
 
+.post-locked-alert {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+
+    background-color: var(--night-blue-o5);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+
+    z-index: 20;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.post-locked-alert p {
+    font-size: clamp(22px, 1.4vw, 1.4vw);
+    color: var(--big-yellow);
+}
+.post-locked-alert svg {
+    fill: var(--big-yellow)
+}
+.post.post.standar .post-locked-alert p {
+    color: var(--white);
+}
+.post.post.standar .post-locked-alert svg {
+    fill: var(--white);
+}
+
 
 .post {
-    background-color: var(--sky-blue);
-    border-radius: 20px;
     width: 50%;
     min-height: 300px;
-    overflow: hidden;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    z-index: 1;
+    position: relative;
+
 }
+.post-content {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    background-color: var(--sky-blue);
+    border-radius: 20px;
+    padding: 20px;
+    z-index: 2;
+}
+
+.post.vip, .post.post.standar {
+
+    position: relative;
+}
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .post.vip::after, .post.vip::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: 3px;
+    border-radius: 20px;
+    animation: 3s spin linear infinite;
+  }
+  .post.vip::before{
+    filter: blur(1.5rem);
+    opacity: 0.5;
+  }
+  @keyframes spin{
+    from{
+      --angle: 0deg;
+    }
+    to{
+      --angle: 360deg;
+    }
+  }
+  .post.standar::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: var(--white);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: 3px;
+    border-radius: 20px;
+  }
+
+
+
+
 
 
 .post-header {
@@ -33,7 +126,6 @@
 
 
 .post-body {
-    border-top: solid 2px var(--white);
     margin-top: 20px;
     padding-top: 20px;
 }
@@ -44,7 +136,6 @@
 .post-body img, .post-body video {
     max-width: 50%;
     max-height: 250px;
-    border: solid 1px var(--white);
     border-radius: 10px;
     cursor: pointer;
 }
@@ -62,6 +153,7 @@
     gap: 10px;
     width: 100%;
 }
+
 .post-media-container-images {
     display: flex;
     align-items: center;
@@ -77,14 +169,19 @@
 
 
 .post-footer {
-    min-height: 60px;
     width: 100%;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+.post-footer div {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding-top: 20px;
-    margin-top: 20px;
-    border-top: solid 2px var(--white);
+
 }
 .post-footer p {
     font-size: 22px;
@@ -96,4 +193,25 @@
 }
 .post-footer svg:hover {
     opacity: 1;
+}
+
+
+@media (max-width: 768px) {
+    .post {
+        width: 100%;
+        border-radius: 0 !important;
+    }
+    .post-content {
+        border-radius: 0;
+    }
+    .post.vip::after, .post.standar::after, .post.vip::before {
+        border-radius: 0 !important;
+    }
+    .post-locked-alert {
+        border-radius: 0;
+    }
+    .post-locked-alert p {
+        width: 90%;
+        text-align: center;
+    }
 }

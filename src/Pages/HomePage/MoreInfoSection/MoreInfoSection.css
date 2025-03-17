@@ -1,0 +1,28 @@
+
+
+.more-info-section {
+    height: 70vh;
+    width: 80vw;
+    margin: 0;
+    padding: 0;
+}
+
+.more-info-section p {
+    text-align: justify !important;
+}
+.more-info-section button {
+    margin-top: 20px;
+    font-size: 22px;
+    margin-bottom: 100px;
+}
+
+
+
+@media (max-width: 758px) {
+    .more-info-section {
+        width: 90vw;
+    }
+    .more-info-section p {
+        font-size: 22px;
+    }
+}

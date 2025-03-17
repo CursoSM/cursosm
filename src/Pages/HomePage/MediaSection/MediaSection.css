@@ -5,19 +5,28 @@
     justify-content: center;
     gap: 20px;
 }
-.media-section .column {
+.media-section .content {
+    width: 100%;
+    max-height: 400px;
+    height: fit-content;
+    overflow: hidden;
+    border-radius: 20px;
+    position: relative;
+    z-index: 1;
+}
+.media-section .content > * {
+    width: 100%;
+}
+.media-section .column, .media-section .column.responsive {
     width: 40%;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.media-section .column > * {
-    aspect-ratio: 16 / 9;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    width: 100%;
-
+.media-section .column.responsive {
+    display: none;
 }
+
 .media-section img {
     max-width: 100%;
     object-fit: cover;
@@ -29,3 +38,101 @@
     filter: brightness(.8);
 }
 
+.locked-overlay {
+    width: 150%;
+    height: 150%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: var(--night-blue-o5);
+    backdrop-filter: blur(10px);
+    z-index: 22;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.locked-overlay p:first-child {
+    width: 100%;
+    text-align: center;
+    font-size: 23px;
+}
+
+
+.content-holder {
+    z-index: 2;
+}
+
+.content-holder.vip, .content-holder.standar {
+
+    position: relative;
+}
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .content-holder.vip::after, .content-holder.vip::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 0;
+    padding: 3px;
+    border-radius: 20px;
+    animation: 3s spin linear infinite;
+  }
+  .content-holder.vip::before{
+    filter: blur(1.5rem);
+    opacity: 0.5;
+  }
+  @keyframes spin{
+    from{
+      --angle: 0deg;
+    }
+    to{
+      --angle: 360deg;
+    }
+  }
+  .content-holder.standar::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: var(--white);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: 3px;
+    border-radius: 20px;
+  }
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .media-section {
+        flex-direction: column;
+        align-items: center;
+
+    }
+    .column {
+        display: none !important;
+    }
+    .column.responsive {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        width: 95% !important;
+    }
+}

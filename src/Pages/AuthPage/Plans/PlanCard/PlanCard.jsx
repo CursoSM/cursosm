@@ -6,14 +6,6 @@ import { motion } from "framer-motion"
 const PlanCard = ({ data }) => {
     return (
         <div 
-        initial={{
-            scale: .5,
-            opacity: 0
-        }}
-        whileInView={{
-            scale: 1,
-            opacity: 1
-        }}
         className={`plan-card ${data.isFeatured ? "featured" : "" }`}>
            <div className="plan-card-header">
            <h1 className="plan-card-title">{data.title}</h1>

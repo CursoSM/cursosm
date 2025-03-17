@@ -1,0 +1,128 @@
+.profile-section {
+    width: 100vw;
+}
+
+
+
+.profile-panel {
+    width: 30%;
+    background-color: var(--sky-blue);
+    z-index: 20;
+}
+.profile-panel-content {
+    width: 100%;
+    height: 100%;
+    background-color: var(--sky-blue);
+    border-radius: 20px;
+    padding: 20px;
+}
+.profile-panel.vip-profile {
+    
+    position: relative !important;
+}
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .profile-panel.vip-profile::after, .profile-panel.vip-profile::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    padding: 3px;
+    border-radius: 20px;
+    animation: 3s spin linear infinite;
+  }
+
+  .profile-panel.vip-profile::before{
+    filter: blur(1.5rem);
+    opacity: 0.5;
+    z-index: -1;
+  }
+  .profile-panel.vip-profile::after {
+    z-index: -1;
+  }
+  @keyframes spin{
+    from{
+      --angle: 0deg;
+    }
+    to{
+      --angle: 360deg;
+    }
+  }
+
+
+.profile-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 40%;
+}
+.profile-panel-profile-picture {
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white);
+}
+.profile-panel-profile-picture p {
+  font-size: 28px;
+  color: var(--night-blue);
+}
+.profile-panel-header-info h2 {
+    font-size: clamp(18px, 1vw, 1vw);
+}
+
+
+
+.profile-panel-body {
+    height: 40%;
+}
+.profile-plan-display {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+.profile-plan-display h1 {
+    font-size: clamp(22px, 3vw, 3vw);
+}
+
+
+
+
+.profile-panel-footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.profile-panel-footer button {
+    background-color: var(--dangerous-red);
+}
+
+
+
+
+@media (max-width: 768px) {
+  .profile-panel {
+    width: 100%;
+    border-radius: 0;
+  }
+  .profile-panel-content {
+    border-radius: 0;
+  }
+  .profile-panel.vip-profile::before, .profile-panel.vip-profile::after {
+    border-radius: 0;
+  }
+}

@@ -4,14 +4,14 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import MediaViewerProvider from './Contexts/MediaViewerContext.jsx'
-import SlideBarContextProvider from './Contexts/SlideBarContext.jsx'
+import AuthContextProvider from './Contexts/AuthContext.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <SlideBarContextProvider>
+  <AuthContextProvider>
     <MediaViewerProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>,
     </MediaViewerProvider>
-  </SlideBarContextProvider>
+  </AuthContextProvider>
 )

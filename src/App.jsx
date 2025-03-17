@@ -13,7 +13,7 @@ function App() {
       <MediaViewer />
       <Routes>
         <Route path="/auth" element={<AuthPage />} />
-        <Route path="/" element={<AuthPage />} />
+        <Route path="/" element={<HomePage />} />
       </Routes>
 
 

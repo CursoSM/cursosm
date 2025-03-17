@@ -12,12 +12,12 @@ const CustomButton = ({children, onClick, animationType = "rotate", className}) 
                 scale: 1
             }}
             whileHover={{
-                rotate: animationType == "rotate" ? "10deg" : "0deg",
-                scale: animationType == "rotate" ? 1.2 : 1,
+                rotate: animationType == "rotate" ? "3deg" : "0deg",
+                scale: animationType == "rotate" ? 1.05 : 1,
                 scaleY: animationType == "verticalScale" ? 1.2 : 1
             }}
             whileTap={{
-                scale: animationType == "rotate" ? 1.4 : 1.2
+                scale: 1.1
             }}
             transition={{
                 duration: .6,

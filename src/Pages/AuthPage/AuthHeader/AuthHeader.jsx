@@ -3,39 +3,34 @@ import CustomButton from "../../../Components/CustomButton/CustomButton"
 
 import { FaGripLines } from "react-icons/fa";
 import { useContext } from "react";
-import { SlideBarContext } from "../../../Contexts/SlideBarContext";
+import { AuthContext } from "../../../Contexts/AuthContext";
 
 
 
-const AuthHeader = ({props}) => {
-    const {setIsOpen} = useContext(SlideBarContext)
+const AuthHeader = () => {
+    const {setAuthMode, setSlideBarOpen} = useContext(AuthContext)
+
+    const handleLogIn = () => {
+        setAuthMode("log-in")
+        setSlideBarOpen(false)
+    }
+    const handleSignUp = () => {
+        setAuthMode("sign-up")
+        setSlideBarOpen(false)
+    }
 
     return (
         <div className="auth-header ">
-            <h1>Curso SM</h1>
-            <nav className="auth-sections-nav">
-                <ul>
-                    <li><a 
-                    className={props.currentSection == 0 ? "current" : ""} 
-                    onClick={() => props.setCurrentSection(0)}>
-                        Información
-                        </a></li>
-                        <li><a 
-                    className={props.currentSection == 1 ? "current" : ""} 
-                    onClick={() => props.setCurrentSection(1)}>
-                        Pases
-                        </a></li>
-                </ul>
-            </nav>
+            <h1>Formación SM</h1>
+
             <div className="user-data">
-                <CustomButton className={"log-in"} animationType="verticalScale">
-                    Iniciar sesión 
-                </CustomButton>
-                <CustomButton className={"sign-up"} animationType="verticalScale">
-                    Registrarse
-                </CustomButton>
+                <CustomButton onClick={handleLogIn}>Iniciar sesión</CustomButton>
+                <CustomButton onClick={handleSignUp} className="sign-up">Registrarse</CustomButton>
             </div>
-            <FaGripLines className="burguer-menu" onClick={() => setIsOpen(true)} />
+            <FaGripLines
+             className="burger-menu" 
+             onClick={() => setSlideBarOpen(true)}
+             />
         </div>
     )
 }
