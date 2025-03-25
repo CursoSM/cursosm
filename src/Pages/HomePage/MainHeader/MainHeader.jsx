@@ -9,7 +9,7 @@ const MainHeader = ({onProfileClick}) => {
 
 
     return (
-        <div className={`main-header`}>
+        <div className={`main-header dot-pattern`}>
             <h1>
                 Formación SM           
             </h1>

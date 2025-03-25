@@ -1,12 +1,13 @@
 import { motion } from "framer-motion"
 
 
-const CustomButton = ({children, onClick, animationType = "rotate", className}) => {
+const CustomButton = ({children, onClick, animationType = "rotate", className, disable = false}) => {
 
 
     return (
         <motion.button
-        className={className}
+        disabled={disable}
+        className={`${className} ${disable ? "disable-btn" : ""}`}
             initial={{
                 rotate: "0deg",
                 scale: 1

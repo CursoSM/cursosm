@@ -34,6 +34,10 @@ html, body {
 }
 
 
+.disable-btn {
+  opacity: .5;
+  cursor: not-allowed;
+}
 button {
   background-color: var(--blue);
   padding: 10px 15px 10px 15px;
@@ -43,7 +47,7 @@ button {
   border-radius: 10px;
   cursor: pointer;
 }
-input:-webkit-autofill, input {
+input:-webkit-autofill, input, textarea {
   outline: none;
   padding: 10px;
   border-radius: 10px;
@@ -60,6 +64,38 @@ a {
 a:hover {
   opacity: 1;
 }
+
+select {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--light-blue); /* Asegúrate de tener esta variable en tu CSS */
+  color: var(--night-blue);
+  outline: none;
+  -webkit-box-shadow: 0 0 0 1000px rgb(226, 226, 226) inset !important; /* Similar a los inputs */
+  cursor: pointer;
+}
+
+/* Estilo para las opciones del dropdown */
+select option {
+  background-color: var(--light-blue);
+  color: var(--night-blue);
+  padding: 10px;
+}
+
+/* Estilos para la opción seleccionada */
+select:focus {
+  border: 2px solid var(--blue); /* Aplica el color de borde cuando esté enfocado */
+  box-shadow: 0 0 5px var(--blue); /* Agrega sombra para destacar el enfoque */
+}
+
+/* Estilo para desactivar el select */
+select:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+
 
 
 .dot-pattern {

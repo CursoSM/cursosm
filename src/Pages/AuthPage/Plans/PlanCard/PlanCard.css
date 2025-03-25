@@ -92,13 +92,23 @@
 }
 
 .plan-card .get-plan-button {
-    width: 100%;
+    flex: 1;
     font-size: 18px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.get-plan-button svg {
+    font-size: 28px;
+    margin-left: 5px;
 }
 .plan-card.featured .get-plan-button {
     background-color: var(--big-yellow);
     color: var(--night-blue);
+}
+.plan-card.plan-card.featured .get-plan-button svg {
+    fill: var(--night-blue);
 }
 
 

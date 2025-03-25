@@ -457,6 +457,24 @@
 }
 
 
+.user-auth-article .user-session {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+}
+.user-auth-article .user-session button {
+    background-color: var(--dangerous-red);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.507);
+    margin: 0;
+}
+.user-auth-article .user-session h2 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
 
 
 

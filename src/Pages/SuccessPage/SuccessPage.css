@@ -1,0 +1,24 @@
+
+
+.success-page {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.sucess-page-content {
+    width: 90%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.sucess-page-content > * {
+    width: 100%;
+    list-style: none;
+    text-decoration: none;
+}

@@ -14,7 +14,7 @@
 }
 
 .auth-header h1 {
-    font-size: 38px;
+    font-size: clamp(16px, 32px, 3vw);
 }
 
 
@@ -36,7 +36,7 @@
     opacity: 1;
 }
 
-.user-data {
+.auth-header .auth-form {
     width: 400px;
     padding: 15px;
     display: flex;
@@ -45,7 +45,7 @@
     gap: 10px;
     margin-right: 50px;
 }
-.user-data button {
+.auth-header .auth-form button {
     font-size: 18px;
     width: 100%;
 
@@ -58,17 +58,38 @@
 .burger-menu {
     font-size: 22px;
 }
+
+
+
+
+
+.user-data {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.user-data button {
+    background-color: var(--dangerous-red);
+}
+
+
+
+
 @media (max-width: 768px) {
-    
-    
+        
+   
     .auth-sections-nav {
         display: none;
     }
-    .user-data {
+    .auth-form {
+        display: none !important;
+    }
+    .user-data h2 {
         display: none;
     }
 
     .burguer-menu {
+        display: flex;
         font-size: 32px;
         margin-right: 20px;
     }

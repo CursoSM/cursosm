@@ -1,13 +1,20 @@
 .profile-section {
-    width: 100vw;
+    width: 90vw;
+    min-height: 70vh;
+
+    display: flex;
+    gap: 30px;
 }
 
 
 
 .profile-panel {
-    width: 30%;
+    width: 40%;
+    height: fit-content;
     background-color: var(--sky-blue);
     z-index: 20;
+    border-radius: 20px;
+
 }
 .profile-panel-content {
     width: 100%;
@@ -64,24 +71,33 @@
     gap: 20px;
     height: 40%;
 }
-.profile-panel-profile-picture {
-    width: 140px;
-    height: 140px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--white);
-}
-.profile-panel-profile-picture p {
-  font-size: 28px;
-  color: var(--night-blue);
+
+.profile-panel-header-info {
+  margin-bottom: 20px;
 }
 .profile-panel-header-info h2 {
     font-size: clamp(18px, 1vw, 1vw);
 }
+.profile-panel-header-info svg {
+  margin-left: 10px;
+  cursor: pointer;
+  opacity: .5;
+  transition: .3s;
+}
+.profile-panel-header-info svg:hover {
+  opacity: 1;
+}
 
+.new-alias-form {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
 
+.new-alias-form svg {
+  font-size: 28px;
+}
 
 .profile-panel-body {
     height: 40%;
@@ -105,6 +121,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: 20px;
 }
 
 .profile-panel-footer button {
@@ -113,16 +130,46 @@
 
 
 
+.saved-posts-holder {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.saved-posts-title {
+  opacity: .5;
+}
 
 @media (max-width: 768px) {
+  .profile-section {
+    flex-direction: column;
+    width: 100%;
+  }
+
+
+
   .profile-panel {
     width: 100%;
     border-radius: 0;
+  }
+  .profile-panel-profile-picture {
+    width: 30%;
+    height: auto;
+    border-radius: 50%;
+    aspect-ratio: 1/ 1;
   }
   .profile-panel-content {
     border-radius: 0;
   }
   .profile-panel.vip-profile::before, .profile-panel.vip-profile::after {
     border-radius: 0;
+  }
+
+  .saved-posts-holder {
+    width: 100%;
+  }
+  .saved-posts-holder h2 {
+    width: 100%;
+    text-align: center;
   }
 }

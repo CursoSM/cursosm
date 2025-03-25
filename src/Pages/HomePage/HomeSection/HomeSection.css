@@ -5,9 +5,99 @@
     gap: 30px;
 
     display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+
+}
+.home-section-posts-holder {
+    display: flex;
+    flex-direction: column;
+    justify-content: column-reverse;
+    align-items: center;
+    gap: 20px;
+
+    width: 70%;
+}
+
+
+.home-section-members-holder {
+    display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    width: 20%;
+
+    padding: 20px;
 }
-.home-section .post:first-child {
-    margin-top: 30px;
+.home-section-members-holder h2 {
+    opacity: .5;
+    
 }
+.home-section-member {
+    width: 100%;
+    font-size: clamp(16px, 1.5vw, 3vw);
+    border-radius: 10px;
+
+}
+.home-section-member p {
+    z-index: 2 !important;
+    background-color: var(--sky-blue);
+    position: relative;
+    padding: 10px ;
+    border-radius: 10px;
+}
+
+.home-section-member.vip {
+    position: relative;
+}
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .home-section-member.vip::after, .home-section-member.vip::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 0;
+    padding: 3px;
+    border-radius: 10px;
+    animation: 3s spin linear infinite;
+  }
+  .home-section-member.vip::before{
+    filter: blur(1.5rem);
+    opacity: 0.5;
+  }
+  @keyframes spin{
+    from{
+      --angle: 0deg;
+    }
+    to{
+      --angle: 360deg;
+    }
+  }
+
+
+  .home-section-member.standar p {
+    border: solid 3px rgba(255, 255, 255, 0.534) !important;
+  }
+
+
+
+  @media (max-width: 768px) {
+    .home-section-members-holder {
+      display: none;
+    }
+    .home-section-posts-holder {
+      width: 100%;
+    }
+  }

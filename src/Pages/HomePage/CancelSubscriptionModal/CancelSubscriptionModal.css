@@ -1,0 +1,59 @@
+
+.cancel-sub-modal-bg {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    z-index: 1000;
+    
+    background-color: var(--night-blue-o5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cancel-sub-modal {
+    width: 90%;
+    min-height: 60%;
+    margin: 0;
+    padding: 50px;
+    background-color: var(--sky-blue) !important;
+    border-radius: 20px;
+}
+.cancel-sub-modal-header {
+    height: 15%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+.cancel-sub-modal-header svg {
+    font-size: 28px;
+    cursor: pointer;
+    opacity: .5;
+}
+.cancel-sub-modal-header svg:hover {
+    opacity: 1;
+}
+.cancel-sub-modal button {
+    background-color: var(--dangerous-red);
+    font-size: 24px;
+    margin-top: 20px;
+}
+.cancel-sub-modal-alert {
+    color: var(--dangerous-red);
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+@media (max-width: 1024px) {
+    .cancel-sub-modal-bg {
+        min-height: 100vh;
+        height: fit-content;
+    }
+    .cancel-sub-modal {
+        width: 100%;
+        height: fit-content;
+        border-radius: 0;
+    }
+}

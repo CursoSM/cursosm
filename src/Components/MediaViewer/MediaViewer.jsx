@@ -21,7 +21,7 @@ const MediaViewer = () => {
                     media.type == "image" ? 
                     <img src={`${import.meta.env.VITE_API_BASE}${media.url}`} /> :
                     media.type == "video" ?
-                        <video conntrols>
+                        <video controls>
                             <source src={`${import.meta.env.VITE_API_BASE}${media.url}`} type="video/mp4" />
                             Tu navegador no soporta el elemento de video.
                         </video> : undefined

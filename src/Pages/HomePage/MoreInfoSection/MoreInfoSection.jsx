@@ -1,8 +1,30 @@
+import { useState, useEffect } from "react"
 import CustomButton from "../../../Components/CustomButton/CustomButton"
 import "./MoreInfoSection.css"
 
 
 const MoreInfoSection = () => {
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [telegramLink, setTelegramLink] = useState('')
+       
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_API_BASE}/api/data-extra/get-data`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(response => response.json())
+            .then(res => {
+                console.log(res)
+                setPhoneNumber(res.data.phoneNumber)
+                setTelegramLink(res.data.telegramLink)
+            })
+            .catch(err => console.log(err))
+    }, [])
+
+    const handleTelegramClick = () => {
+        window.open(telegramLink, '_blank');
+    };
+
     return (
         <section className="more-info-section dot-pattern">
             <h1>Más Información</h1>
@@ -16,10 +38,10 @@ const MoreInfoSection = () => {
             <br />
             <h2>Soporte y Consultas</h2>
             <p>Si tienes dudas sobre la formación o necesitas asistencia personalizada, puedes comunicarte directamente con el coach.</p>
-            <p><strong>Teléfono:</strong> <a href="tel:+123456789">+123 456 789</a></p>
+            <p><strong>Teléfono:</strong> <a href={`tel:${phoneNumber}`}>{phoneNumber}</a></p>
             <br />
 
-            <CustomButton>
+            <CustomButton onClick={handleTelegramClick}>
             Grupo de Telegram
             </CustomButton>
         </section>

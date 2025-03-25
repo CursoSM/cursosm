@@ -1,32 +1,50 @@
-import CustomButton from "../../../../Components/CustomButton/CustomButton"
 import "./PlanCard.css"
 
-import { motion } from "framer-motion"
+import { useContext } from "react"
+import { AuthContext } from "../../../../Contexts/AuthContext"
+
+import { FaPaypal } from "react-icons/fa";
+
+import CustomButton from "../../../../Components/CustomButton/CustomButton"
+
+
 
 const PlanCard = ({ data }) => {
-    return (
-        <div 
-        className={`plan-card ${data.isFeatured ? "featured" : "" }`}>
-           <div className="plan-card-header">
-           <h1 className="plan-card-title">{data.title}</h1>
-           <h4 className="plan-card-description">{data.description}</h4>
-           </div>
+    const {userData} = useContext(AuthContext)
 
-           <div className="plan-card-body">
-           <ul >
-                {
-                    data.benefits.map((current, index) => (
-                        <li className="plan-card-benefit" key={index}>{current}</li>
-                    ))
-                }
-            </ul>
-           </div>
+    const handleBuy = (link) => {
+        window.open(link, '_blank');
+
+    }
+
+    return (
+        <div
+            className={`plan-card ${data.planType == 'vip' ? "featured" : ""}`}>
+            <div className="plan-card-header">
+                <h1 className="plan-card-title">{data.planName}</h1>
+                <h4 className="plan-card-description">{data.planDescription}</h4>
+            </div>
+
+            <div className="plan-card-body">
+                <ul >
+                    {
+                        data.planBenefits.map((current, index) => (
+                            <li className="plan-card-benefit" key={index}>{current.benefitItem}</li>
+                        ))
+                    }
+                </ul>
+            </div>
 
             <div className="plan-card-footer">
-            <h1 className="plan-card-price">${data.price}</h1>
-            <CustomButton animationType="verticalScale" className={"get-plan-button"}>
-                Adquirir
-            </CustomButton>
+                <h1 className="plan-card-price">{data.planPrice} USD</h1>
+
+                {
+                    !userData ?
+                    <p style={{color: "var(--dangerous-red)"}}>*Inicia sesión antes de suscribirte</p>
+                    : <CustomButton className={'get-plan-button'} onClick={() => handleBuy(data.paypalLink)}>Comprar <FaPaypal /></CustomButton> 
+                    
+
+                }
             </div>
         </div>
     )

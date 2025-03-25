@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 import "./CourseOverviewAuth.css"
 
 import { motion } from "framer-motion";
@@ -11,53 +11,6 @@ import { AuthContext } from "../../../Contexts/AuthContext";
 
 
 
-
-const plans = [
-    {
-        title: "Básico",
-        description: `Empieza tu camino hacia el crecimiento personal con las herramientas esenciales. 
-        Accede a materiales exclusivos, ejercicios prácticos y contenido diseñado para ayudarte a desbloquear tu potencial.`,
-        benefits: [
-            "Acceso al grupo privado de Telegram para soporte y comunidad",
-            "Acceso al contenido del plan básico (videos, lecturas y ejercicios prácticos)",
-            "Mentoría grupal limitada con feedback en sesiones en vivo",
-            "Sesiones grupales mensuales de preguntas y respuestas"
-        ],
-        price: 900,
-        isFeatured: false
-    },
-    {
-        title: "Estándar",
-        description: `Lleva tu desarrollo al siguiente nivel con sesiones en vivo, 
-        acceso a una comunidad de apoyo y recursos avanzados. Obtén estrategias personalizadas para 
-        aplicar en tu vida diaria y alcanzar resultados más rápidos.`,
-        benefits: [
-            "Acceso al grupo privado de Telegram",
-            "Acceso al contenido del plan estándar (incluye todo el contenido del plan básico)",
-            "Mentoría grupal con seguimiento y asesoramiento personalizado",
-            "Sesiones grupales quincenales de coaching en vivo",
-            "Desafíos y ejercicios prácticos exclusivos"
-        ],
-        price: 1200,
-        isFeatured: false
-    },
-    {
-        title: "VIP",
-        description: `Transformación total con acompañamiento exclusivo. Disfruta de mentoría 
-        1:1, acceso prioritario a nuevos contenidos y eventos privados. Este plan es para quienes 
-        buscan cambios profundos y duraderos con el máximo nivel de soporte.`,
-        benefits: [
-            "Acceso al grupo privado de Telegram",
-            "Acceso a todo el contenido del programa, incluyendo material inédito y exclusivo",
-            "Mentoría prioritaria con seguimiento personalizado",
-            "Sesiones grupales semanales de coaching en vivo",
-            "Sesiones 1:1 mensuales para un acompañamiento profundo",
-            "Acceso a eventos y talleres privados exclusivos"
-        ],
-        price: 1600,
-        isFeatured: true
-    },
-];
 
 
 
@@ -76,7 +29,9 @@ const goalStyle = (index, currentIndex) => {
 
 
 const CourseOverviewAuth = () => {
-    const { setAuthMode, setSlideBarOpen } = useContext(AuthContext)
+    const [plans, setPlans] = useState([])
+
+    const { setAuthMode, setSlideBarOpen, userData, handleLogOut } = useContext(AuthContext)
 
     const [currentGoal, setCurrentGoal] = useState(0) // Inicializa con 0, o el índice que prefieras
 
@@ -87,6 +42,21 @@ const CourseOverviewAuth = () => {
     let touchStartY = 0;
     let touchEndY = 0;
 
+
+
+
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_API_BASE}/api/plan/get-plans`, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(response => response.json())
+            .then(res => {
+                console.log(res)
+                setPlans(res)
+            })
+            .catch(err => console.log(err))
+    }, [])
 
 
 
@@ -521,17 +491,25 @@ const CourseOverviewAuth = () => {
 
             <article className="user-auth-article">
                 <div className="user-auth-article-bg" />
-                <CustomButton
-                    animationType="verticalScale"
-                    onClick={handleLogIn}
-                >Iniciar sesión
-                </CustomButton>
-                <CustomButton
-                    className="sign-up"
-                    animationType="verticalScale"
-                    onClick={handleSignUp}
-                >Registrarse
-                </CustomButton>
+                {
+                    userData == null ? <>
+                        <CustomButton
+                            animationType="verticalScale"
+                            onClick={handleLogIn}
+                        >Iniciar sesión
+                        </CustomButton>
+                        <CustomButton
+                            className="sign-up"
+                            animationType="verticalScale"
+                            onClick={handleSignUp}
+                        >Registrarse
+                        </CustomButton>
+                    </> :
+                        <div className="user-session">
+                            <h2>{userData.username}</h2>
+                            <CustomButton onClick={handleLogOut} className="log-out">Cerrar sesión</CustomButton>
+                        </div>
+                }
             </article>
 
             <article className="plans-article">

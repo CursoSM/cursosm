@@ -3,6 +3,7 @@ import "./MediaSection.css"
 import { MediaViewerContext } from "../../../Contexts/MediaViewerContext"
 
 import { FaLock } from "react-icons/fa";
+import { AuthContext } from "../../../Contexts/AuthContext";
 
 const MediaItem = ({mediaData, setViewerMedia, index}) => {
   return (
@@ -40,6 +41,7 @@ const MediaItem = ({mediaData, setViewerMedia, index}) => {
 }
 
 const MediaSection = ({ posts }) => {
+  const {userData} = useContext(AuthContext)
   const [media, setMedia] = useState([])
 
   const { setMedia: setViewerMedia } = useContext(MediaViewerContext)
@@ -48,9 +50,7 @@ const MediaSection = ({ posts }) => {
   useEffect(() => {
     setMedia([])
 
-    const userPlan = JSON.parse(localStorage.getItem("userData")).plan
-
-    console.log(userPlan)
+    const userPlan = userData.plan
 
     posts.map((current_) => {
       if (current_.media?.length > 0) {

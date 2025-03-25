@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import "./HomePage.css"
 import MainHeader from "./MainHeader/MainHeader"
 import Post from "./Post/Post"
@@ -7,6 +7,8 @@ import MediaSection from "./MediaSection/MediaSection"
 import ProfileSection from "./ProfileSection/ProfileSection"
 import { useNavigate } from "react-router-dom"
 import MoreInfoSection from "./MoreInfoSection/MoreInfoSection"
+import { AuthContext } from "../../Contexts/AuthContext"
+import CancelSubscriptionModal from "./CancelSubscriptionModal/CancelSubscriptionModal"
 
 
 const HomePage = () => {
@@ -15,51 +17,61 @@ const HomePage = () => {
     const [posts, setPosts] = useState([])
     const [currentSection, setCurrentSection] = useState(0)
 
-    useEffect(() => {
-        const validateUser = async () => {
-            try {
-                const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/auth/validate-session`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({authorization: `Bearer ${localStorage.getItem("userToken")}`})
-                });
+    const {userData, setUserData} = useContext(AuthContext)
 
-                const data = await response.json();
-    
-                if (!response.ok) {
-                    console.error("Error de validación:", data);
-                    localStorage.removeItem("userToken");
-                    navigate("/auth")
-                    return;
-                }
-        
-                localStorage.setItem("userData", JSON.stringify(data.user))   
-                navigate("/")
-            } catch (error) {
-                console.error("Error en la solicitud:", error);
+
+
+
+    const validateUser = async () => {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/auth/validate-session`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({authorization: `Bearer ${localStorage.getItem("userToken")}`})
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                console.error("Error de validación:", data);
                 localStorage.removeItem("userToken");
                 navigate("/auth")
+                return;
             }
-        }
+            
+            setUserData(data.user)
 
+            if(data.user.plan == "nonePlan") {
+                navigate("/auth")
+            }
+            
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+            localStorage.removeItem("userToken");
+            navigate("/auth")
+        }
+    }
+
+    useEffect(() => {
         validateUser()
-       
     }, [])
 
     useEffect(() => {
-        async function getPosts() {
-            fetch(import.meta.env.VITE_API_POSTS_GET)
-                .then((response) => response.json())
-                .then((data) => {
-                    setPosts(data.data);
-                    console.log(data.data)
-                })
-        }
 
-        getPosts()
-    }, [])
+        fetch(`${import.meta.env.VITE_API_BASE}/api/posts/get-all`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+        })
+        .then(response => response.json())
+        .then(res => {
+            setPosts(res.posts)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [userData])
 
     const handleProfile = () => {
        setCurrentSection(3)
@@ -68,6 +80,7 @@ const HomePage = () => {
 
     return (
         <div className="home-page">
+            <CancelSubscriptionModal />
             <MainHeader onProfileClick={handleProfile} />
             <div className="home-page-body">
                 <nav className="home-body-nav">
